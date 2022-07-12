@@ -9,6 +9,10 @@ const userRoutes = require("./routes/user-routes");
 
 app.use("/api/users", userRoutes);
 
+app.use("/", (req, res, next) => {
+    res.send("Checking");
+});
+
 app.listen(PORT, (response) => {
     console.log(`Server Started & Listening at ${PORT}`);
 })
