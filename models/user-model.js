@@ -17,12 +17,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-})
+});
 
 userSchema.methods.validatePassword = async function (password, passwordHash) {
     return await bcrypt.compare(password, passwordHash);
 }
 
+// when doing save operation, we are hashing password before saving it in database
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) {
         next();
@@ -33,4 +34,4 @@ userSchema.pre("save", async function (next) {
 
 const userModel = mongoose.model("user", userSchema);
 
-module.exports = userModel
+module.exports = userModel;
